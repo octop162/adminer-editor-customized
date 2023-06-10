@@ -3,3 +3,4 @@ adminer/vendor
 *.sql
 adminer.css
 editor.php
+*.zip
