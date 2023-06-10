@@ -3,7 +3,7 @@ require('../vendor/autoload.php');
 
 use Monolog\Level;
 use Monolog\Logger;
-use Monolog\Handler\RotatingFileHandler;
+use Monolog\Handler\StreamHandler;
 use Monolog\Formatter\JsonFormatter;
 
 function adminer_object()
@@ -15,13 +15,13 @@ function adminer_object()
     // コンストラクタ
     function __construct()
     {
-      $this->logger = $this->getLogger(realpath('../log') . '/world-debug.log', Level::Debug);
+      $this->logger = $this->getLogger('php://stdout', Level::Debug);
     }
 
     function getLogger($filename, $level = Level::Debug)
     {
       $logger = new Logger('adminer');
-      $handler = new RotatingFileHandler($filename, 0, $level);
+      $handler = new StreamHandler($filename, $level);
       $handler->setFormatter(new JsonFormatter());
       $logger->pushHandler($handler);
       $logger->pushProcessor(function ($record) {

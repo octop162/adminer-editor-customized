@@ -5,7 +5,9 @@
 ```
 wget https://downloads.mysql.com/docs/world-db.zip
 unzip world-db.zip
-mv world/world.sql sql
+mv world-db/world.sql sql
+rmdir world-db
+rm world-db.zip
 ```
 
 ### Adminer用意
@@ -28,4 +30,4 @@ docker compose up -d
 
 ## アクセス
 
-http://localhost/adminer/world.php
+http://localhost:8080/adminer/world.php
