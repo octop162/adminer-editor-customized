@@ -1,7 +1,6 @@
 <?php
 require('../vendor/autoload.php');
 
-use Monolog\Level;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Monolog\Formatter\JsonFormatter;
@@ -15,10 +14,10 @@ function adminer_object()
     // コンストラクタ
     function __construct()
     {
-      $this->logger = $this->getLogger('php://stdout', Level::Debug);
+      $this->logger = $this->getLogger('php://stdout', Logger::INFO);
     }
 
-    function getLogger($filename, $level = Level::Debug)
+    function getLogger($filename, $level = Logger::DEBUG)
     {
       $logger = new Logger('adminer');
       $handler = new StreamHandler($filename, $level);
@@ -62,11 +61,13 @@ function adminer_object()
     function tableName($tableStatus)
     {
       // countryテーブルを非表示
-      $ignored_list = [];
+      $ignored_list = [
+        'country'
+      ];
       if (in_array($tableStatus["Name"], $ignored_list, true)) {
         return '';
       }
-      return h($tableStatus["Name"]);
+      return parent::tableName(($tableStatus));
     }
 
     // 列制限
@@ -79,7 +80,7 @@ function adminer_object()
       if (in_array($field["field"], $ignored_list, true)) {
         return '';
       }
-      return '<span title="' . h($field["full_type"]) . '">' . h($field["field"]) . '</span>';
+      return parent::fieldName($field, $order = 0);
     }
 
     function selectQuery($query, $time, $failed = false)

@@ -13,13 +13,13 @@ rm world-db.zip
 ### Adminer用意
 
 ```
-wget https://github.com/vrana/adminer/releases/download/v4.8.1/editor-4.8.1.php -O adminer/editor.php
+wget https://github.com/vrana/adminer/releases/download/v4.8.1/editor-4.8.1.php -O adminer/public/editor.php
 ```
 
 ### スタイルシート（任意）
 
 ```
-wget https://raw.githubusercontent.com/pepa-linha/Adminer-Design-Dark/master/adminer.css -O adminer/adminer.css
+wget https://raw.githubusercontent.com/pepa-linha/Adminer-Design-Dark/master/adminer.css -O adminer/public/adminer.css
 ```
 
 ## 起動
