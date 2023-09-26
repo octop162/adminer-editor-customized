@@ -86,13 +86,13 @@ function adminer_object()
     function selectQuery($query, $time, $failed = false)
     {
       $output_query = str_replace("\n", " ", $query);
-      $this->logger->debug($output_query);
+      $this->logger->info($output_query);
     }
 
     function messageQuery($query, $time, $failed = false)
     {
       $output_query = str_replace("\n", " ", $query);
-      $this->logger->info($output_query);
+      $this->logger->warning($output_query);
     }
   }
 
