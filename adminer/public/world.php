@@ -12,7 +12,7 @@ function adminer_object()
     private $logger;
 
     // コンストラクタ
-    function __construct()
+    function __construct() 
     {
       $this->logger = $this->getLogger('php://stdout', Logger::INFO);
     }
@@ -95,8 +95,6 @@ function adminer_object()
       $this->logger->info($output_query);
     }
   }
-
-
 
   return new AdminerSoftware();
 }

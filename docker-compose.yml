@@ -15,8 +15,8 @@ services:
       context: .
     restart: always
     ports:
-      - 8080:80
+      - 8080:8080
     volumes:
-      - ./adminer/public:/adminer/public
+      - ./adminer/public/world.php:/adminer/public/world.php
     environment:
       TZ: Asia/Tokyo

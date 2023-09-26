@@ -4,3 +4,5 @@ adminer/vendor
 adminer.css
 editor.php
 *.zip
+samconfig.toml
+.aws-sam

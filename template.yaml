@@ -1,0 +1,58 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Globals:
+  Function:
+    Timeout: 10
+
+Resources:
+  ApiGatewayApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      EndpointConfiguration:
+        Type: REGIONAL
+      StageName: Prod
+      BinaryMediaTypes:
+        - '*~1*'
+      Auth:
+        ResourcePolicy:
+          IpRangeWhitelist: 
+            - "10.0.0.2/32"
+            - "106.72.151.33/32"
+  Function:
+    Type: AWS::Serverless::Function
+    Properties:
+      Architectures:
+        - x86_64
+      PackageType: Image
+      MemorySize: 1024
+      Policies:
+        - CloudWatchLambdaInsightsExecutionRolePolicy 
+      Environment:
+        Variables:
+          PORT: 8080
+      Events:
+        Root:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ApiGatewayApi
+            Path: /
+            Method: ANY
+        Proxy:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ApiGatewayApi
+            Path: /{proxy+}
+            Method: ANY
+    Metadata:
+      DockerTag: v1
+      DockerContext: ./
+      Dockerfile: Dockerfile
+
+Outputs:
+  URL:
+    Description: "API Gateway URL"
+    Value: !Sub "https://${ApiGatewayApi}.execute-api.${AWS::Region}.${AWS::URLSuffix}/Prod/"
+  Function:
+    Description: "Lambda Function ARN"
+    Value: !GetAtt Function.Arn

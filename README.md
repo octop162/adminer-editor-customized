@@ -1,6 +1,4 @@
-## 用意
-
-### SQL用意
+### sql
 
 ```
 wget https://downloads.mysql.com/docs/world-db.zip
@@ -10,24 +8,20 @@ rmdir world-db
 rm world-db.zip
 ```
 
-### Adminer用意
+## local
 
 ```
-wget https://github.com/vrana/adminer/releases/download/v4.8.1/editor-4.8.1.php -O adminer/public/editor.php
-```
-
-### スタイルシート（任意）
-
-```
-wget https://raw.githubusercontent.com/pepa-linha/Adminer-Design-Dark/master/adminer.css -O adminer/public/adminer.css
-```
-
-## 起動
-
-```
+docker compose build
 docker compose up -d
 ```
 
-## アクセス
-
 http://localhost:8080/adminer/world.php
+
+## sam
+
+```
+sam build
+sam deploy --guided
+sam deploy
+sam delete
+```
