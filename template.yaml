@@ -17,8 +17,7 @@ Resources:
       Auth:
         ResourcePolicy:
           IpRangeWhitelist: 
-            - "10.0.0.2/32"
-            - "106.72.151.33/32"
+            - "0.0.0.0/0"
   Function:
     Type: AWS::Serverless::Function
     Properties:
